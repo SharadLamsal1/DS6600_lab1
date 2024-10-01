@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  jupyterlab:
+    image: sharadlamsal/sharad-problem5
+    env_file: .env
+    volumes:
+      - ./problem5:/problem5
+    ports:
+      - "8888:8888"
+    networks:
+      - dbnetwork
+
+  postgres:
+    image: postgres:latest
+    env_file: .env
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - dbnetwork
+
+volumes:
+  postgresdata:
+
+networks:
+  dbnetwork:
